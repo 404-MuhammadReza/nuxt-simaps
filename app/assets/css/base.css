@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght,GRAD@0,17..18,400..700,-50..200;1,17..18,400..700,-50..200&display=swap');
+
+:root {
+  /* Colors */
+  --white: #FFFFFF;
+  --black: #292929;
+
+  --grey-50: #FAFAFA;
+  --grey-100: #F5F5F5;
+  --grey-200: #D8D8D8;
+  --grey-300: #7C7C7C;
+
+  --primary-50: #E4F5FF;
+  --primary-100: #0093EE;
+
+  --success-50: #EDFFEB;
+  --success-100: #0FB900;
+
+  --warning-50: #FFF3E7;
+  --warning-100: #FF8000;
+
+  --danger-50: #ffecec;
+  --danger-100: #E20000;
+
+  /* Sizing */
+  --size-xxs: 0.3125rem; /* 5px */
+  --size-xs: 0.625rem; /* 10px */
+  --size-s: 0.75rem; /* 12px */
+  --size-m: 0.875rem; /* 14px */
+  --size-l: 1rem; /* 16px */
+  --size-xl: 1.25rem; /* 20px */
+  --size-xxl: 1.5rem; /* 24px */
+
+  /* Font Family */
+  --font-primary: 'Google Sans', sans-serif;
+
+  /* Font Weight */
+  --font-regular: 400;
+  --font-medium: 450;
+  --font-semi-bold: 500;
+  --font-bold: 600;
+
+  /* Drop Shadows */
+  --shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+
+  /* Transition Durations */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+
+  /* Transition Curves */
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-pop: cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-snappy: cubic-bezier(0.19, 1, 0.22, 1);
+  --transition-anticipate: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--grey-50);
+}
+
+@media (max-width: 1023px) {
+  html { font-size: 93.75%; }
+}
+
+@media (max-width: 767px) {
+  html { font-size: 87.5%; }
+}
