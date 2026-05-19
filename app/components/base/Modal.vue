@@ -40,7 +40,7 @@ onClickOutside(reference, () => emit('close'))
 <style scoped>
 .modal-container {
   width: 90%;
-  max-height: 90vh;
+  max-height: 90dvh;
   max-width: v-bind(maxWidth);
 
   position: absolute;

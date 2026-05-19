@@ -67,7 +67,7 @@ onMounted(async () => {
 <style scoped>
 .auth-page {
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
 
   display: flex;
   justify-content: center;
