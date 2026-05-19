@@ -14,7 +14,7 @@ const app = useAppStore()
 const { setNotification } = app
 
 const api = useAPI()
-const { badRequest, loading, result, fetchUsage, fetchSubmit, fetchDelete,  fetchExcel, fetchExport, fetchTemplate, resetResult, fetchReport } = api
+const { badRequest, loading, result, fetchUsage, fetchSubmit, fetchDelete,  fetchExcel, fetchExport, fetchExportLogs, fetchTemplate, resetResult, fetchReport } = api
 
 await Promise.all([
   refreshNuxtData('me'),
@@ -121,8 +121,8 @@ const handleTemplate = async () => {
 }
 
 const handleExport = async () => {
-  if (activeTab.value !== 'employee' && activeTab.value !== 'hospital') return
-  await fetchExport(activeTab.value)
+  if (['employee', 'hospital'].includes(activeTab.value)) await fetchExport(activeTab.value)
+  else if (activeTab.value === 'usageDetails' && usagePayload.value.feature) await fetchExportLogs(usagePayload.value)
 }
 
 const handleReport = async (message) => {
@@ -188,7 +188,7 @@ const emit = defineEmits(['close'])
             </div>
           </template>
         </div>
-        <div class="right">
+        <div class="right" :class="activeTab">
           <template v-if="['employee', 'hospital'].includes(activeTab) && activeState === 'home'">
             <BaseButtonDefault variant="warning" :label="`Export ${ activeTab }`" :icon="IconDocsDownload" @click="handleExport" />
             <BaseButtonDefault variant="primary" :label="`Add ${ activeTab }`" :icon="IconDocsAdd" @click="setState('create')" />
@@ -206,6 +206,7 @@ const emit = defineEmits(['close'])
           </template>
           <template v-else-if="activeTab === 'usageDetails' && activeState === 'home'">
             <BaseInputDate v-model:start="usagePayload.start_date" v-model:end="usagePayload.end_date" label="Detail Range" @update:start="getUsageDetails" @update:end="getUsageDetails" />
+            <BaseButtonDefault variant="warning" :label="`Export Data`" :icon="IconDocsDownload" @click="handleExport" />
           </template>
         </div>
       </div>
@@ -371,6 +372,16 @@ const emit = defineEmits(['close'])
 
   .setting-toolbox .right {
     flex-direction: row;
+    width: 100%;
+  }
+
+  .setting-toolbox .right.usageDetails {
+    flex-direction: column;
+  }
+
+  .setting-toolbox .right.usageDetails :deep(button),
+  .setting-toolbox .right.usageDetails :deep(.date-wrapper),
+  .setting-toolbox .right.usageDetails :deep(input){
     width: 100%;
   }
 

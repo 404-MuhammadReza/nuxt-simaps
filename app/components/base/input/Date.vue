@@ -58,7 +58,7 @@ const end = defineModel('end', { type: String, default: '' })
 }
 
 .date-wrapper .inline input {
-  padding: var(--size-xs);
+  padding: calc(var(--size-xs) - 1.25px) var(--size-xs);
   border-radius: var(--size-xs);
 
   font-family: var(--font-primary);

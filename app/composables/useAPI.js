@@ -10,6 +10,7 @@ export const useAPI = () => {
   const loading = ref(false)
   const badRequest = ref([])
 
+  // Get geocoding address from coordinates
   const fetchAddress = async (payload) => {
     const response = await useCustomFetch(`/api/geocoding/address`, {
       method: 'POST',
@@ -19,17 +20,18 @@ export const useAPI = () => {
     return response
   }
 
+  // Get user/employee/hospital/usage data
+  const fetchData = async (entity) => {
+    const response = await useCustomFetch(`/api/${entity}`)
+    return response || []
+  }
+
+  // Log user actions for analytics
   const fetchLogs = (feature, action) => {
     useCustomFetch(`/api/logs`, {
       method: 'POST',
       body: { feature, action }
     })
-  }
-
-  // Get user/employee/hospital/usage data
-  const fetchData = async (entity) => {
-    const response = await useCustomFetch(`/api/${entity}`)
-    return response || []
   }
 
   // Get usage details
@@ -204,6 +206,25 @@ export const useAPI = () => {
     loading.value = false
   }
 
+  // Export logs data to Excel
+  const fetchExportLogs = async (payload) => {
+    loading.value = true
+    const url = `/api/admin/logs/export`
+    const response = await useCustomFetch(url, {
+      method: 'GET',
+      params: payload,
+      responseType: 'blob',
+      notifyError: true
+    })
+
+    if (response) {
+      setNotification('success', 'Successfully export logs')
+      download(response, `logs-${payload.feature} (${payload.start_date}-${payload.end_date})`, 'xlsx')
+    } else setNotification('danger', 'Failed to export logs')
+    loading.value = false
+  }
+
+  // Download report from bulk create
   const fetchReport = async (entity) => {
     if (!report.value) return
 
@@ -223,7 +244,7 @@ export const useAPI = () => {
 
   return {
     loading, result, badRequest, fetchLogs, fetchAddress, fetchData,
-    fetchUsage, fetchSubmit, fetchDelete, fetchExport, fetchExcel, fetchTemplate, resetResult, fetchReport
+    fetchUsage, fetchSubmit, fetchDelete, fetchExport, fetchExcel, fetchTemplate, resetResult, fetchReport, fetchExportLogs
   }
 }
 
