@@ -72,7 +72,7 @@ const options = {
     <template #content>
       <div class="information-content">
         <template v-if="state === 'employee'">
-          <FeaturesEmployeePicture :src="model.picture_url" :alt="model.name" size="calc(var(--size-xxl) * 5)" :border="'var(--size-s)'" />
+          <FeaturesEmployeePicture :src="model.picture_url" :alt="model.name" size="calc(var(--size-xxl) * 5)" :border="'var(--size-s)'" disabled />
           <BaseInputDefault v-model="model.name" label="Name" v-bind="options" />
           <BaseInputDefault v-model="model.employee_id" label="Employee ID" v-bind="options" />
           <BaseInputDefault v-model="model.position" label="Position" v-bind="options" />

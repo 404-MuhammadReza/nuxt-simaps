@@ -18,6 +18,7 @@ const emit = defineEmits(['click'])
         :alt="item.name"
         size="calc(var(--size-xl) * 2)"
         border="var(--size-xxs)"
+        disabled
       />
       <div class="information">
         <span>{{ item.name }}</span>

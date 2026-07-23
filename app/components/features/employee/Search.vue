@@ -37,6 +37,7 @@ defineExpose({ focus })
           :alt="employee.name"
           size="calc(var(--size-xxl) * 1.5)"
           border="var(--size-xxs)"
+          disabled
         />
         <div class="information">
           <span>{{ employee.name }}</span>
